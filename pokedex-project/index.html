@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+    <link href="styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="https://pixvid.org/images/2024/08/29/image29eb5aacf99feb1c.png" />
+    <script src="pokedex.js"></script>
+
+    <title>Pokedex Project - PokeNiWizHarl</title>
+</head>
+<body class="text-gray-200">
+    <div class="centered-container">
+        <!-- Centered container box -->
+        <div class="box flex flex-col items-center">
+            <h1 class="titlee">POKE NI WIZHARL</h1>
+            <!-- Search bar -->
+
+            <input class="search-bar rounded border border-red-500 bg-white-700 text-black" type="search" placeholder="Search Pokémon..." />
+            <!-- Sort icon above the table -->
+            <div class="sort-icon-container flex justify-end w-full pr-4 mb-2">
+                <button class="sort-button" onclick="toggleSort()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v16a1 1 0 01-1 1H4a1 1 0 01-1-1V4z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
+                    </svg>
+                </button>
+            </div>
+            <!-- Table for Pokémon cards -->              
+            <div class="table-container custom-table">
+                <!-- Pokéball Loader -->
+                <div id="pokeball-loader" class="pokeball-loader hidden">
+                    <div class="pokeball"></div>
+                </div>
+                <table class="tablee table-fixed w-full text-center">
+                    <thead class="uppercase">
+                        <tr>
+                            <th class="py-2 border p-4">POKEMON</th>
+                            <th class="py-2 border p-4">NAME</th>
+                            <th class="py-2 border p-4">TYPES</th>
+                            <th class="py-2 border p-4">ABILITIES</th>
+                            <th class="py-2 border p-4">DESCRIPTION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Additional rows will be added here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End of centered container box -->
+    </div>
+    <div class="container">
+        <div class="header">
+
+        </div>
+        <div class="pokemon-wrapper">
+
+        </div>
+    </div>
+</body>
+</html>
