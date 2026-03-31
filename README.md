@@ -1,4 +1,5 @@
 Ultimate Pokedex - Platinum Edition
+____________________________________________________________________________________________________________________________________________________________
 A premium, modernized Pokédex built with HTML5, Tailwind CSS, and JavaScript, designed to deliver a high-performance and visually stunning Pokémon discovery experience.
 
 Key Features
