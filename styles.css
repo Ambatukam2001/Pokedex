@@ -1,0 +1,98 @@
+body {
+    background: linear-gradient(180deg, #F6F8FC 0%, #F6F8FC 60%, #FFBDBD 100%) no-repeat fixed;
+    min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 10px;
+}
+
+/* Pokéball Opening Animation */
+#opening-animation.open .top-half {
+    transform: translateY(-100%);
+}
+
+#opening-animation.open .bottom-half {
+    transform: translateY(100%);
+}
+
+#opening-animation.open .ball-center {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+}
+
+/* Character Cards */
+.pokemon-card {
+    background: white;
+    border-radius: 32px;
+    padding: 24px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-image: radial-gradient(circle at 70% 20%, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%);
+}
+
+.pokemon-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.pokemon-card img {
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+    transition: transform 0.4s ease;
+}
+
+.pokemon-card:hover img {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Modal Effects */
+#pokemon-modal.show {
+    opacity: 1;
+}
+
+#pokemon-modal.show .modal-content {
+    transform: scale(1);
+}
+
+/* Type Colors - Modern Soft Palette */
+.bg-grass { background-color: #63BC5A; }
+.bg-poison { background-color: #9B69D9; }
+.bg-fire { background-color: #FF9D55; }
+.bg-water { background-color: #5090D6; }
+.bg-bug { background-color: #91C12F; }
+.bg-normal { background-color: #919AA2; }
+.bg-electric { background-color: #F4D23C; }
+.bg-ground { background-color: #D97845; }
+.bg-fairy { background-color: #EC8FE6; }
+.bg-fighting { background-color: #CE416B; }
+.bg-psychic { background-color: #FA7179; }
+.bg-rock { background-color: #C5B78C; }
+.bg-ghost { background-color: #5269AD; }
+.bg-ice { background-color: #73CEC0; }
+.bg-dragon { background-color: #0B6DC3; }
+.bg-dark { background-color: #5A5465; }
+.bg-steel { background-color: #5A8EA2; }
+.bg-flying { background-color: #89AAE3; }
+
+/* Stat Bars */
+.stat-bar-container {
+    height: 8px;
+    background: #E2E8F0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease-in-out;
+}

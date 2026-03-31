@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Pokedex - Premium Edition</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Unbounded:wght@700&display=swap" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="https://pixvid.org/images/2024/08/29/image29eb5aacf99feb1c.png" />
+</head>
+<body class="font-['Roboto'] text-slate-800 overflow-hidden">
+    <!-- Pokeball Opening Animation -->
+    <div id="opening-animation" class="fixed inset-0 z-[100] flex flex-col pointer-events-none">
+        <div class="top-half h-1/2 bg-[#FF1C1C] border-b-[6px] border-slate-900 transition-transform duration-[1.2s] ease-in-out flex items-end justify-center">
+        </div>
+        <div class="bottom-half h-1/2 bg-white border-t-[6px] border-slate-900 transition-transform duration-[1.2s] ease-in-out">
+        </div>
+        <div class="ball-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-white border-[8px] border-slate-900 rounded-full z-10 transition-all duration-[1s] ease-in-out flex items-center justify-center">
+            <div class="inner-button w-16 h-16 border-[4px] border-slate-900 rounded-full shadow-[0_0_20px_rgba(0,0,0,0.1)]"></div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        <header class="bg-[#FF1C1C] px-6 py-10 shadow-lg border-b-[6px] border-slate-900 sticky top-0 z-40">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h1 class="text-4xl font-black text-white tracking-tight mb-2 uppercase italic">Pokédex</h1>
+                    <p class="text-white/80 text-sm font-bold tracking-widest uppercase">Gotta Catch 'em All</p>
+                </div>
+                
+                <div class="flex items-center gap-4 w-full md:w-auto text-black">
+                    <div class="relative flex-grow md:w-80 group">
+                        <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </span>
+                        <input class="search-bar w-full pl-11 pr-12 py-4 bg-white border-[3px] border-slate-900 rounded-full focus:ring-4 focus:ring-red-300 transition-all outline-none text-slate-900 placeholder-slate-400 font-bold" type="search" placeholder="Search a Pokémon..." />
+                        <button class="absolute inset-y-0 right-0 pr-4 flex items-center text-black hover:text-red-500 transition-colors" id="clear-search" onclick="clearSearch()">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                    <button class="p-4 bg-white text-slate-900 border-[3px] border-slate-900 rounded-full hover:bg-yellow-400 transition-all shadow-[4px_4px_0px_#000]" onclick="toggleSort()">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"/></svg>
+                    </button>
+                    <button class="p-4 bg-white text-slate-900 border-[3px] border-slate-900 rounded-full hover:bg-red-500 hover:text-white transition-all shadow-[4px_4px_0px_#000]" title="Exit Pokédex">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+
+        <section class="max-w-7xl mx-auto px-6 py-10">
+            <!-- Loader -->
+            <div id="loader" class="flex flex-col items-center justify-center py-20 hidden">
+                <div class="w-16 h-16 border-4 border-yellow-400 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <p class="text-slate-400 font-medium animate-pulse">Catching 'em all...</p>
+            </div>
+
+            <!-- Card Grid -->
+            <div id="pokemon-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <!-- Dynamically populated -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Detail Modal -->
+    <div id="pokemon-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-md hidden transition-opacity duration-300 opacity-0">
+        <div class="modal-content relative bg-white w-full max-w-xl h-full md:h-auto md:max-h-[90vh] md:rounded-[40px] overflow-hidden shadow-2xl flex flex-col md:flex-row transform scale-95 transition-transform duration-300">
+            <button class="absolute top-6 right-6 z-50 bg-white/50 backdrop-blur-md p-2 rounded-full text-black hover:bg-red-500 hover:text-white transition-all" onclick="closeModal()">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            
+            <div id="modal-left" class="md:w-1/2 p-10 flex flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-green-400 to-emerald-600 transition-colors duration-500">
+                <!-- Watermark Pokéballs -->
+                <div class="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-20">
+                    <img src="pokeball.png" class="absolute -bottom-10 -right-10 w-64 h-64 filter invert brightness-200 rotate-12 animate-pulse" alt="">
+                    <img src="pokeball.png" class="absolute -top-10 -left-10 w-32 h-32 filter invert brightness-200 -rotate-12 opacity-50" alt="">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-10" style="background-image: radial-gradient(circle at 20% 30%, white 1px, transparent 1px), radial-gradient(circle at 70% 80%, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+                </div>
+                
+                <span id="modal-id" class="absolute top-8 left-8 text-white/30 font-black text-6xl tracking-tighter z-10">#001</span>
+                <img id="modal-gif" src="" class="w-48 h-48 md:w-64 md:h-64 object-contain z-10 drop-shadow-2xl transition-transform hover:scale-110" alt="Pokemon GIF">
+            </div>
+
+            
+            <div id="modal-right" class="md:w-1/2 p-8 md:p-10 flex flex-col overflow-y-auto">
+                <div class="mb-8">
+                    <h2 id="modal-name" class="text-4xl font-bold text-slate-800 tracking-tight lowercase first-letter:uppercase mb-2">Bulbasaur</h2>
+                    <div id="modal-types" class="flex gap-2"></div>
+                </div>
+                
+                <div class="mb-8 p-4 bg-slate-50 rounded-3xl">
+                    <p id="modal-desc" class="text-slate-600 leading-relaxed text-sm"></p>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Base Stats</h3>
+                    <div id="modal-stats" class="space-y-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="pokedex.js"></script>
+</body>
+</html>
